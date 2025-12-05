@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Fade Slider</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .dot {
+        width: 20px;
+        height: 20px;
+        background-color: gray;
+        border: 2px solid black;
+        border-radius: 50%;
+        cursor: pointer;
+        
+     
+    }
+    .dot.active {
+     background-color: blue;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <div class="w-full max-w-6xl bg-white rounded-xl shadow-lg flex overflow-hidden">
+    
+    <!-- Left Content -->
+    <div class="w-1/2 p-10 flex flex-col justify-center space-y-6 bg-gray-50" id="left-content">
+      <h2 id="slide-heading" class="text-3xl font-bold text-blue-500">Heading 1</h2>
+      <p id="slide-desc" class="text-gray-600">This is the description of slide 1.</p>
+      <input type="text" id="slide-input" readonly class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none bg-white shadow-inner">
+    </div>
+
+    <!-- Right Slider -->
+    <div class="w-1/2 relative">
+      <div id="slider" class="relative w-full h-full">
+        <!-- Slides -->
+        <div class="slide absolute inset-0 transition-opacity duration-700 opacity-100 z-10">
+          <img src="https://images.unsplash.com/photo-1612832021045-d1c80e25d698?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" class="w-full h-full object-cover" alt="Slide 1">
+        </div>
+        <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0 z-0">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" class="w-full h-full object-cover" alt="Slide 2">
+        </div>
+        <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0 z-0">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" class="w-full h-full object-cover" alt="Slide 3">
+        </div>
+      </div>
+
+      <!-- Dots Navigation -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex z-50" id="dots">vikram</div>
+    </div>
+  </div>
+
+<script>
+  const slidesData = [
+    {
+      heading: "Heading 1",
+      desc: "This is the description of slide 1.",
+      color: "text-blue-500",
+      inputText: "Slide 1 Text"
+    },
+    {
+      heading: "Heading 2",
+      desc: "This is the description of slide 2.",
+      color: "text-green-500",
+      inputText: "Slide 2 Text"
+    },
+    {
+      heading: "Heading 3",
+      desc: "This is the description of slide 3.",
+      color: "text-orange-500",
+      inputText: "Slide 3 Text"
+    }
+  ];
+
+  let currentSlide = 0;
+  const totalSlides = slidesData.length;
+  let typingTimer;
+
+  function typeInputText(text) {
+    const $input = $("#slide-input");
+    $input.val("");
+    let index = 0;
+
+    clearInterval(typingTimer);
+    typingTimer = setInterval(() => {
+      if (index < text.length) {
+        $input.val($input.val() + text.charAt(index));
+        index++;
+      } else {
+        clearInterval(typingTimer);
+      }
+    }, 100); // typing speed
+  }
+
+  function showSlide(index) {
+    $(".slide").removeClass("opacity-100 z-10").addClass("opacity-0 z-0");
+    $(".slide").eq(index).removeClass("opacity-0 z-0").addClass("opacity-100 z-10");
+
+    // Update left content
+    $("#slide-heading")
+      .text(slidesData[index].heading)
+      .removeClass()
+      .addClass("text-3xl font-bold " + slidesData[index].color);
+    $("#slide-desc").text(slidesData[index].desc);
+
+    // Typing effect for input
+    typeInputText(slidesData[index].inputText);
+
+    // Dot active state
+    $(".dot").removeClass("active");
+    $(".dot").eq(index).addClass("active");
+  }
+
+  $(document).ready(function () {
+    for (let i = 0; i < totalSlides; i++) {
+      $("#dots").append(`<div class="dot" data-index="${i}"></div>`);
+    }
+
+    $(".dot").on("click", function () {
+      currentSlide = $(this).data("index");
+      showSlide(currentSlide);
+    });
+
+    showSlide(0);
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }, 5000);
+  });
+</script>
+
+</body>
+</html>
