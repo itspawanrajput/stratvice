@@ -68,7 +68,7 @@
                 <li><a href="#home" class="hover:text-blue-[#2b7fff]">Home</a></li>
                 <li><a href="#about" class="hover:text-blue-[#2b7fff]">About</a></li>
                 <li><a href="#service" class="hover:text-blue-[#2b7fff]">Services</a></li>
-                <!-- <li><a href="#projects" class="hover:text-blue-[#2b7fff]">Projects</a></li> -->
+                <li><a href="careers.php" class="hover:text-blue-[#2b7fff]">Careers</a></li>
                 <li><a href="#contact" class="hover:text-blue-[#2b7fff]">Contact</a></li>
             </ul>
             <div class="overflow-hidden hidden lg:block">
@@ -93,7 +93,7 @@
                 <li class=""><a href="#home" class="hover:text-blue-[#2b7fff] ">Home</a></li>
                 <li class=""><a href="#about" class="hover:text-blue-[#2b7fff]">About</a></li>
                 <li class=""><a href="#service" class="hover:text-blue-[#2b7fff]">Services</a></li>
-                <!-- <li><a href="#projects" class="hover:text-blue-[#2b7fff]">Projects</a></li> -->
+                <li class=""><a href="careers.php" class="hover:text-blue-[#2b7fff]">Careers</a></li>
                 <li><a href="#contact" class="hover:text-blue-[#2b7fff]">Contact</a></li>
             </ul>
         </nav>
