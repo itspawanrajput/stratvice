@@ -1,0 +1,23 @@
+# Environment and configuration
+.env
+config.php
+
+# Database
+*.sqlite
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Development files (remove before production)
+simulator.html
+
+# Logs
+*.log
